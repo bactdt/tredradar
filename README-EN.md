@@ -3033,7 +3033,7 @@ docker run -d --name trendradar-mcp \
   -p 127.0.0.1:3333:3333 \
   -v $(pwd)/config:/app/config:ro \
   -v $(pwd)/output:/app/output:ro \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Etc/GMT+1 \
   wantcat/trendradar-mcp:latest
 
 # Windows PowerShell
@@ -3041,7 +3041,7 @@ docker run -d --name trendradar-mcp `
   -p 127.0.0.1:3333:3333 `
   -v ${PWD}/config:/app/config:ro `
   -v ${PWD}/output:/app/output:ro `
-  -e TZ=Asia/Shanghai `
+  -e TZ=Etc/GMT+1 `
   wantcat/trendradar-mcp:latest
 ```
 
@@ -3312,15 +3312,15 @@ GitHub Actions uses a time format called "Cron". You don't need to understand it
 |-----------|----------------|------|
 | **Every Hour** | `- cron: "0 * * * *"` | **Default**, runs at minute 0 |
 | **Every 30 Mins** | `- cron: "*/30 * * * *"` | Runs every 30 minutes |
-| **Daily at 8 AM** | `- cron: "0 0 * * *"` | ⚠️ `0` because UTC 0:00 = Beijing 8:00 AM |
-| **Work Hours (30m)** | `- cron: "*/30 0-14 * * *"` | Beijing 8:00 - 22:00 |
-| **3 Times Daily** | `- cron: "0 0,6,12 * * *"` | Beijing 8:00, 14:00, 20:00 |
+| **Daily at 8 AM (UTC−1)** | `- cron: "0 9 * * *"` | ⚠️ 08:00 UTC−1 = 09:00 UTC |
+| **Work Hours (30m, UTC−1)** | `- cron: "*/30 9-23 * * *"` | UTC−1 08:00 - 22:00 |
+| **3 Times Daily (UTC−1)** | `- cron: "0 9,15,21 * * *"` | UTC−1 08:00, 14:00, 20:00 |
 
 #### ⚠️ Two Important Notes
 
 1. **Time Zone**: GitHub servers use **UTC time**.
-   - **Math**: Your desired Beijing time **minus 8 hours** = value to fill.
-   - *Example: For Beijing 20:00, fill in 12:00.*
+   - **Math**: Your desired UTC−1 time **plus 1 hour** = value to fill.
+   - *Example: For UTC−1 20:00, fill in 21:00 UTC.*
 
 2. **Don't run too often**: Suggest intervals no shorter than 30 minutes.
    - GitHub free resources are limited; running too frequently might get flagged.
@@ -3445,7 +3445,7 @@ If you are overseas or find the push time doesn't match your local time, you can
 
 ```yaml
 app:
-  timezone: "Asia/Shanghai"  # Default is China Standard Time
+  timezone: "Etc/GMT+1"  # Default is UTC−1 (Etc/GMT signs are reversed)
 ```
 - Example for Los Angeles: `America/Los_Angeles`
 - Example for London: `Europe/London`

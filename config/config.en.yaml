@@ -13,11 +13,11 @@
 app:
   # Timezone (affects all time displays, schedule evaluation, and data storage)
   # Common timezones:
-  #   - Asia/Shanghai (Beijing time, UTC+8)
+  #   - Etc/GMT+1 (fixed UTC−1; Etc/GMT signs are reversed)
   #   - America/New_York (US Eastern, UTC-5/-4)
   #   - Europe/London (London time, UTC+0/+1)
   # Full list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  timezone: "Asia/Shanghai"
+  timezone: "Etc/GMT+1"
   show_version_update: true           # Show version-update prompt (true=show, false=hide)
 
 

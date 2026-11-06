@@ -1805,7 +1805,7 @@ def _format_standalone_platform_item(item: Dict, index: int, format_type: str, r
 
 
 def _format_standalone_rss_item(
-    item: Dict, index: int, format_type: str, timezone: str = "Asia/Shanghai"
+    item: Dict, index: int, format_type: str, timezone: str = DEFAULT_TIMEZONE
 ) -> str:
     """格式化独立展示区的 RSS 条目
 

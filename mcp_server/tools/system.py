@@ -249,7 +249,7 @@ class SystemManagementTools:
             )
 
             # 3. 转换与持久化
-            timezone = config_data.get("app", {}).get("timezone", "Asia/Shanghai")
+            timezone = config_data.get("app", {}).get("timezone", "Etc/GMT+1")
             current_time = get_configured_time(timezone)
             crawl_date = format_date_folder(None, timezone)
             crawl_time_str = format_time_filename(timezone)

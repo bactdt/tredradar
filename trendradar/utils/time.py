@@ -11,7 +11,7 @@ from typing import Optional
 import pytz
 
 # 默认时区常量 - 仅作为 fallback，正常运行时使用 config.yaml 中的 app.timezone
-DEFAULT_TIMEZONE = "Asia/Shanghai"
+DEFAULT_TIMEZONE = "Etc/GMT+1"
 
 
 def get_configured_time(timezone: str = DEFAULT_TIMEZONE) -> datetime:
@@ -19,7 +19,7 @@ def get_configured_time(timezone: str = DEFAULT_TIMEZONE) -> datetime:
     获取配置时区的当前时间
 
     Args:
-        timezone: 时区名称，如 'Asia/Shanghai', 'America/Los_Angeles'
+        timezone: 时区名称，如 'Etc/GMT+1'（固定 UTC−1）, 'America/Los_Angeles'
 
     Returns:
         带时区信息的当前时间

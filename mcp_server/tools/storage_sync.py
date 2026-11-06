@@ -89,7 +89,7 @@ class StorageSyncTools:
 
             remote_config = self._get_remote_config()
             config = self._load_config()
-            timezone = config.get("app", {}).get("timezone", "Asia/Shanghai")
+            timezone = config.get("app", {}).get("timezone", "Etc/GMT+1")
 
             self._remote_backend = RemoteStorageBackend(
                 bucket_name=remote_config["bucket_name"],
@@ -257,7 +257,7 @@ class StorageSyncTools:
             # 计算需要拉取的日期（最近 N 天）
             from trendradar.utils.time import get_configured_time
             config = self._load_config()
-            timezone = config.get("app", {}).get("timezone", "Asia/Shanghai")
+            timezone = config.get("app", {}).get("timezone", "Etc/GMT+1")
             now = get_configured_time(timezone)
 
             target_dates = []

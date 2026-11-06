@@ -3082,7 +3082,7 @@ docker run -d --name trendradar-mcp \
   -p 127.0.0.1:3333:3333 \
   -v $(pwd)/config:/app/config:ro \
   -v $(pwd)/output:/app/output:ro \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Etc/GMT+1 \
   wantcat/trendradar-mcp:latest
 
 # Windows PowerShell
@@ -3090,7 +3090,7 @@ docker run -d --name trendradar-mcp `
   -p 127.0.0.1:3333:3333 `
   -v ${PWD}/config:/app/config:ro `
   -v ${PWD}/output:/app/output:ro `
-  -e TZ=Asia/Shanghai `
+  -e TZ=Etc/GMT+1 `
   wantcat/trendradar-mcp:latest
 ```
 
@@ -3320,15 +3320,15 @@ GitHub Actions 使用一种叫 "Cron" 的时间格式，不需要深入理解，
 |-----------|------------|------|
 | **每小时一次** | `- cron: "0 * * * *"` | **默认配置**，第 0 分钟运行 |
 | **每 30 分钟** | `- cron: "*/30 * * * *"` | 每隔 30 分钟运行一次 |
-| **每天早 8 点** | `- cron: "0 0 * * *"` | ⚠️ 写 `0` 是因为 UTC 时间 (0点) = 北京时间 (8点) |
-| **工作时间每半小时** | `- cron: "*/30 0-14 * * *"` | 对应北京时间 8:00 - 22:00 |
-| **一日三餐点** | `- cron: "0 0,6,12 * * *"` | 对应北京时间 8:00、14:00、20:00 |
+| **每天 UTC−1 早 8 点** | `- cron: "0 9 * * *"` | ⚠️ UTC−1 8:00 = UTC 9:00 |
+| **UTC−1 工作时间每半小时** | `- cron: "*/30 9-23 * * *"` | 对应 UTC−1 8:00 - 22:00 |
+| **UTC−1 一日三餐点** | `- cron: "0 9,15,21 * * *"` | 对应 UTC−1 8:00、14:00、20:00 |
 
 #### ⚠️ 两个重要提醒
 
 1. **时差问题**：GitHub 的服务器在国外，用的是 UTC 时间。
-   - **简单的算术题**：你想设定的北京时间 **减去 8 小时** = 你要填的时间。
-   - *例子：想让它北京时间 20:00 运行，设置里要填 12:00*
+   - **简单的算术题**：你想设定的 UTC−1 时间 **加 1 小时** = 你要填的 UTC 时间。
+   - *例子：想让它 UTC−1 20:00 运行，设置里要填 21:00*
 
 2. **不要太频繁**：建议间隔不要少于 30 分钟。
    - GitHub 免费资源有限，跑得太勤可能会被官方限制账号。
@@ -3448,7 +3448,7 @@ storage:
 
 ```yaml
 app:
-  timezone: "Asia/Shanghai"  # 默认是中国时间
+  timezone: "Etc/GMT+1"  # 默认 UTC−1（Etc/GMT 的符号与常规写法相反）
 ```
 - 比如你在美国洛杉矶，改成：`America/Los_Angeles`
 - 比如你在英国伦敦，改成：`Europe/London`

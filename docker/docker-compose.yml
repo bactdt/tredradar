@@ -12,7 +12,7 @@ services:
       - ../output:/app/output
 
     environment:
-      - TZ=Asia/Shanghai
+      - TZ=Etc/GMT+1
       # Web 服务器
       - WEBSERVER_PORT=${WEBSERVER_PORT:-8080}
       # 通知渠道
@@ -68,5 +68,5 @@ services:
       - ../output:/app/output
 
     environment:
-      - TZ=Asia/Shanghai
+      - TZ=Etc/GMT+1
       - MCP_PORT=${MCP_PORT:-3333}
